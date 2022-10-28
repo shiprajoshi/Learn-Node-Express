@@ -2,11 +2,23 @@ const http = require("http");
 
 const express = require("express");
 
+const bodyParser = require("body-parser");
+
 const app = express();
 
-app.use("/add-product", (req, res, next) => {
+app.use(bodyParser.urlencoded({ extended: false }));
+
+app.use("/add-product", (req, res) => {
   console.log("First Middleware!!");
-  res.send("<h1>The 'add product' page</h1>");
+  res.send(`<h1>The 'add product' page</h1>
+            <form action="/product" method="POST"><input type="text" name="product-name"/>
+            <button type="submit">Add product</button></form>`);
+});
+
+//will execute only when the route matches for the post request else it will fallback to  "/"
+app.post("/product", (req, res) => {
+  console.log(req.body);
+  res.redirect("/");
 });
 
 app.use("/", (req, res, next) => {
