@@ -10,7 +10,8 @@ const app = express();
 
 app.use(bodyParser.urlencoded({ extended: false }));
 
-app.use(adminRoutes);
+//filter using /admin routes
+app.use("/admin", adminRoutes);
 
 app.use(customerRoutes);
 
