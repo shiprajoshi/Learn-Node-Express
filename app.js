@@ -7,6 +7,12 @@ const customerRoutes = require("./routes/customer");
 const dirName = require("./utils/path");
 const app = express();
 
+// tells  express which templating engine are we using, so that it finds files with that extension
+app.set("view engine", "ejs");
+
+// tells express where to find the above mentioned dynamic views, in our case /views
+app.set("views", "views");
+
 app.use(bodyParser.urlencoded({ extended: false }));
 
 //filter using /admin routes

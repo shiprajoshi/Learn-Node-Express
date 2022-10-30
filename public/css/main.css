@@ -16,3 +16,28 @@ header {
 .nav_item a {
   text-decoration: none;
 }
+
+.item_card {
+  box-shadow: 2px 2px 2px 2px grey;
+  width: 300px;
+}
+
+img {
+  height: 250px;
+  width: 245px;
+}
+
+.item_description {
+  padding: 20px;
+}
+
+.products-section {
+  margin-top: 20px;
+}
+
+.products {
+  display: grid;
+  column-gap: 20px;
+  row-gap: 20px;
+  grid-template-columns: auto auto auto auto;
+}

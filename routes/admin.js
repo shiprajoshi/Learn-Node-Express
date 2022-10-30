@@ -7,7 +7,8 @@ const products = [];
 
 router.get("/add-product", (req, res) => {
   console.log("First Middleware!!");
-  res.sendFile(path.join(dirName, "views", "add-product.html"));
+  //res.sendFile(path.join(dirName, "views", "add-product.html"));
+  res.render("add-product", { pageTitle: "Add a product" });
 });
 
 //will execute only when the route matches for the post request.
