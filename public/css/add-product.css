@@ -1,0 +1,19 @@
+.main_form {
+  margin-top: 20px;
+  display: flex;
+  justify-content: center;
+}
+
+.textField:focus {
+  border: blue;
+}
+
+.button {
+  background: white;
+  border: solid blue 1px;
+}
+
+.button:hover {
+  background-color: rgb(111, 121, 181);
+  cursor: pointer;
+}
