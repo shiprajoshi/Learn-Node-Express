@@ -5,6 +5,7 @@ const path = require("path");
 const adminData = require("./routes/admin");
 const customerRoutes = require("./routes/customer");
 const dirName = require("./utils/path");
+const errorController = require("./controllers/error");
 const app = express();
 
 // tells  express which templating engine are we using, so that it finds files with that extension
@@ -22,9 +23,7 @@ app.use(customerRoutes);
 
 app.use(express.static(path.join(__dirname, "public")));
 
-app.use((req, res) => {
-  res.status(404).sendFile(path.join(dirName, "views", "404NotFound.html"));
-});
+app.use(errorController.get404);
 
 //const server = http.createServer(app); not required because express creates the server when we call listen method
 app.listen(3000);
