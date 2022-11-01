@@ -8,7 +8,9 @@ exports.getProducts = (req, res) => {
 };
 
 exports.getCart = (req, res) => {
-  res.render("shop/cart", { pageTitle: "Cart" });
+  Cart.fetchAll((products) => {
+    res.render("shop/cart", { pageTitle: "Cart", products });
+  });
 };
 
 exports.getCheckout = (req, res) => {
@@ -26,10 +28,15 @@ exports.getProductDetails = (req, res) => {
 };
 
 exports.postAddToCart = (req, res) => {
-  console.log(req.body);
-  // res.send(200);
   Product.findById(req.body.id, (prodDetails) => {
     Cart.saveItem(prodDetails);
-    res.redirect("shop/cart");
+    res.redirect("/cart");
+  });
+};
+
+exports.deleteItem = (req, res) => {
+  console.log(req.params.id, "id!!!!");
+  Cart.deleteItem(req.params.id, (re) => {
+    res.redirect("/cart");
   });
 };

@@ -37,11 +37,14 @@ class Product {
   }
 
   static findById(id, cb) {
+    console.log(id, "hellou");
     let products = [];
     fs.readFile(filePath, (err, content) => {
       if (!err) {
         products = JSON.parse(content);
+        console.log(products);
         const selectedProduct = products.find((prod) => prod.id == id);
+        console.log(selectedProduct, "seleceee");
         cb(selectedProduct);
       } else {
         cb([]);
