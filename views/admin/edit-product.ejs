@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <%- include('../includes/head.ejs')%>
+  </head>
+  <body>
+    <%- include('../includes/nav-bar.ejs') %>
+    <h1>Product Info</h1>
+    <main class="main_form">
+      <form action="/admin/edit-product/<%= productDetails.id%>" method="POST">
+        <label>Product Name</label> <br />
+        <input
+          type="text"
+          name="title"
+          class="textField"
+          value="<%= productDetails.title%>"
+        />
+        <br /><br />
+        <label>Product Description</label> <br />
+        <textarea name="description" rows="4" cols="50" class="textField">
+          <%= productDetails.description%>
+        </textarea>
+        <br />
+        <br />
+        <label>Cost (£)</label><br />
+        <input
+          type="number"
+          name="price"
+          class="textField"
+          step="0.01"
+          value="<%= productDetails.price%>"
+        />
+        <br />
+        <br />
+        <label>Image</label> <br />
+        <input
+          type="url"
+          name="image"
+          class="textField"
+          value="<%= productDetails.imageURL%>"
+        />
+        <br />
+        <br />
+        <button type="submit" class="button">Save Product</button>
+      </form>
+    </main>
+  </body>
+</html>

@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+  <%- include('../includes/head.ejs')%>
+  <body>
+    <%- include('../includes/nav-bar.ejs') %>
+    <main class="products-section">
+      <!-- <h1>My Products</h1> -->
+      <% if(products.length==0){ %>
+      <h1>No products found</h1>
+      <% } else { %>
+      <div class="products">
+        <% for(const product of products){ %>
+        <div class="item_card">
+          <div class="item_description">
+            <div class="item-title"><b><%= product.title %></b></div>
+            <img src="<%= product.imageURL %>" alt="<%= product.title%>" />
+            <p><%= product.description %></p>
+            <div>£ <%= product.price %></div>
+            <br />
+            <button>
+              <a href="/product-details/<%= product.id%>">Details</a>
+            </button>
+            <button>Add to cart</button>
+          </div>
+        </div>
+        <% } %>
+      </div>
+
+      <% } %>
+    </main>
+  </body>
+</html>

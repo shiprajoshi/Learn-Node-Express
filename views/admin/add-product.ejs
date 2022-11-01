@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+  <%- include('../includes/head.ejs')%>
+  <body>
+    <%- include('../includes/nav-bar.ejs') %>
+    <main class="main_form">
+      <form action="/admin/add-product" method="POST">
+        <label>Product Name</label> <br />
+        <input type="text" name="title" class="textField" />
+        <br /><br />
+        <label>Product Description</label> <br />
+        <textarea
+          name="description"
+          rows="4"
+          cols="50"
+          class="textField"
+        ></textarea>
+        <br />
+        <br />
+        <label>Cost (£)</label><br />
+        <input type="number" name="price" class="textField" step="0.01" />
+        <br />
+        <br />
+        <label>Image</label> <br />
+        <input type="url" name="image" class="textField" />
+        <br />
+        <br />
+
+        <button type="submit" class="button">Add Product</button>
+      </form>
+    </main>
+  </body>
+</html>

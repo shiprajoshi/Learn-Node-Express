@@ -41,3 +41,11 @@ img {
   row-gap: 20px;
   grid-template-columns: auto auto auto auto;
 }
+
+.item-title {
+  text-align: center;
+  margin: 10px;
+}
+.product_details {
+  text-align: center;
+}

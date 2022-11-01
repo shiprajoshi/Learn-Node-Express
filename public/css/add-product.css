@@ -4,6 +4,10 @@
   justify-content: center;
 }
 
+.textField {
+  padding: 5px;
+}
+
 .textField:focus {
   border: blue;
 }
