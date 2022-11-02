@@ -6,6 +6,7 @@ const adminData = require("./routes/admin");
 const customerRoutes = require("./routes/customer");
 const dirName = require("./utils/path");
 const errorController = require("./controllers/error");
+const { mongoConnect } = require("./utils/database");
 const app = express();
 
 // tells  express which templating engine are we using, so that it finds files with that extension
@@ -25,5 +26,9 @@ app.use(express.static(path.join(__dirname, "public")));
 
 app.use(errorController.get404);
 
+mongoConnect(() => {
+  console.log("client");
+  app.listen(3000);
+});
+
 //const server = http.createServer(app); not required because express creates the server when we call listen method
-app.listen(3000);

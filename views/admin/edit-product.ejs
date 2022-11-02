@@ -7,7 +7,7 @@
     <%- include('../includes/nav-bar.ejs') %>
     <h1>Product Info</h1>
     <main class="main_form">
-      <form action="/admin/edit-product/<%= productDetails.id%>" method="POST">
+      <form action="/admin/edit-product/<%= productDetails._id%>" method="POST">
         <label>Product Name</label> <br />
         <input
           type="text"
