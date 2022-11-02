@@ -20,12 +20,14 @@
             <button>
               <a href="/product-details/<%= product.id%>">Details</a>
             </button>
-            <button>Add to cart</button>
+            <form action="/add-to-cart" method="POST">
+              <button type="submit">Add to cart</button>
+              <input type="hidden" name="id" value="<%= product.id%>" />
+            </form>
           </div>
         </div>
         <% } %>
       </div>
-
       <% } %>
     </main>
   </body>

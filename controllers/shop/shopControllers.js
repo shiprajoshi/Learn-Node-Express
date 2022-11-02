@@ -22,7 +22,7 @@ exports.getProductDetails = (req, res) => {
   Product.findById(prodId, (prodDetails) => {
     res.render("shop/product-details", {
       pageTitle: "ProductDetails",
-      prodDetails: prodDetails,
+      product: prodDetails,
     });
   });
 };
@@ -30,7 +30,7 @@ exports.getProductDetails = (req, res) => {
 exports.postAddToCart = (req, res) => {
   Product.findById(req.body.id, (prodDetails) => {
     Cart.saveItem(prodDetails);
-    res.redirect("/cart");
+    res.redirect("/");
   });
 };
 

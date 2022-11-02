@@ -6,15 +6,12 @@
   <body>
     <%- include('../includes/nav-bar.ejs') %>
     <div class="product_details">
-      <h1><%= prodDetails.title%></h1>
+      <h1><%= product.title%></h1>
       <hr />
-      <img src="<%= prodDetails.imageURL %>" alt="<%= prodDetails.title%>" />
-      <p><%= prodDetails.price%></p>
-      <p><%= prodDetails.description%></p>
-      <form action="/add-to-cart" method="POST">
-        <button type="submit">Add to cart</button>
-        <input type="hidden" name="id" value="<%= prodDetails.id%>" />
-      </form>
+      <img src="<%= product.imageURL %>" alt="<%= product.title%>" />
+      <p><%= product.price%></p>
+      <p><%= product.description%></p>
+      <%-include('../includes/add-to-cart.ejs') %>
     </div>
   </body>
 </html>

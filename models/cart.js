@@ -34,7 +34,8 @@ class Cart {
           cartItems.products = [...cartItems.products, updatedProduct];
         }
         //calculating price
-        cartItems.totalPrice = cartItems.totalPrice + item.price;
+        cartItems.totalPrice =
+          Number(cartItems.totalPrice) + Number(item.price);
       }
       // console.log(cartItems, "items");
       fs.writeFile(filePath, JSON.stringify(cartItems), (err) => {});
