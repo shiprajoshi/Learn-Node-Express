@@ -19,7 +19,14 @@ exports.getAdminProducts = (req, res) => {
 
 exports.postAddProduct = (req, res) => {
   const { title, image, price, description } = req.body;
-  const prod = new Product(title, image, price, description);
+  const prod = new Product(
+    title,
+    image,
+    price,
+    description,
+    null,
+    req.user._id
+  );
   prod
     .save()
     .then((result) => {

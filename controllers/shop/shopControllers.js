@@ -10,13 +10,27 @@ exports.getProducts = (req, res) => {
 };
 
 exports.getCart = (req, res) => {
-  Cart.fetchAll((products) => {
-    res.render("shop/cart", { pageTitle: "Cart", products });
-  });
+  req.user
+    .getCartItems()
+    .then((products) => {
+      console.log(products.totalPrice, "prod");
+      res.render("shop/cart", {
+        pageTitle: "Cart",
+        products: products.products,
+        totalPrice: products.totalPrice,
+      });
+    })
+    .catch((err) => console.log(err));
 };
 
 exports.getCheckout = (req, res) => {
-  res.render("shop/checkout", { pageTitle: "Checkout" });
+  req.user
+    .getOrders()
+    .then((orders) => {
+      res.render("shop/orders", { pageTitle: "Checkout", orders: orders });
+      console.log(orders);
+    })
+    .catch((err) => console.log(err));
 };
 
 exports.getProductDetails = (req, res) => {
@@ -32,15 +46,31 @@ exports.getProductDetails = (req, res) => {
 };
 
 exports.postAddToCart = (req, res) => {
-  Product.findById(req.body.id, (prodDetails) => {
-    Cart.saveItem(prodDetails);
-    res.redirect("/");
-  });
+  Product.findById(req.body._id)
+    .then((product) => {
+      return req.user.addToCart(product);
+    })
+    .then((result) => {
+      console.log(result);
+      res.redirect("/cart");
+    })
+    .catch((err) => console.log(err));
 };
 
 exports.deleteItem = (req, res) => {
-  console.log(req.params.id, "id!!!!");
-  Cart.deleteItem(req.params.id, (re) => {
+  Product.findById(req.params.id).then((product) => {
+    req.user.deleteCartItem(product);
     res.redirect("/cart");
   });
+};
+
+exports.postCheckout = (req, res) => {
+  console.log("hellooo", req);
+  req.user
+    .addOrder()
+    .then((result) => {
+      res.redirect("/orders");
+      console.log("order placed");
+    })
+    .catch((err) => console.log(err));
 };

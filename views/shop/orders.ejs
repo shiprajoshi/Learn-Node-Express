@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <%- include('../includes/head.ejs')%>
+  </head>
+  <body>
+    <%- include('../includes/nav-bar.ejs') %>
+    <h1>Orders</h1>
+    <% if(orders.length == 0){%>
+    <h2>No orders</h2>
+    <% } else{%> <%for(const order of orders){%>
+    <h3>Order for <%= order.user.name %></h3>
+    <h3>Total price : £<%= order.totalPrice%></h3>
+    <div class="orders">
+      <% for(const product of order.products){%>
+      <div class="item_card">
+        <div class="item_description">
+          <div class="item-title"><b><%= product.title %></b></div>
+          <img src="<%= product.imageURL %>" alt="<%= product.title%>" />
+          <p><%= product.description %></p>
+          <div>£ <%= product.price %></div>
+          <p>Quantity : <%= product.quantity.qty%></p>
+          <br />
+        </div>
+      </div>
+      <%}%>
+      <br />
+    </div>
+    <%}%> <%}%>
+  </body>
+</html>

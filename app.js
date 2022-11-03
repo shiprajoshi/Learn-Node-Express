@@ -7,6 +7,8 @@ const customerRoutes = require("./routes/customer");
 const dirName = require("./utils/path");
 const errorController = require("./controllers/error");
 const { mongoConnect } = require("./utils/database");
+const User = require("./models/user");
+
 const app = express();
 
 // tells  express which templating engine are we using, so that it finds files with that extension
@@ -17,6 +19,14 @@ app.set("views", "views");
 
 app.use(bodyParser.urlencoded({ extended: false }));
 
+app.use((req, res, next) => {
+  User.findById("6362af87034434e69db3655d")
+    .then((user) => {
+      req.user = new User(user.name, user.email, user.cart, user._id);
+      next();
+    })
+    .catch((err) => console.log(err));
+});
 //filter using /admin routes
 app.use("/admin", adminData.router);
 

@@ -49,3 +49,7 @@ img {
 .product_details {
   text-align: center;
 }
+.orders {
+  display: flex;
+  justify-content: space-around;
+}
