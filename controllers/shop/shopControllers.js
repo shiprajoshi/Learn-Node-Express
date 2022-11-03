@@ -1,8 +1,10 @@
 const Cart = require("../../models/Cart");
 const Product = require("../../models/product");
 exports.getProducts = (req, res) => {
-  Product.fetchAll()
+  //find method from mongoose returns you all the elements and also a cursor() and next() if you wanna use
+  Product.find()
     .then((products) => {
+      //console.log(products, "shop");
       res.render("shop/shop", { pageTitle: "Shop", products });
     })
     .catch((err) => console.log(err));
@@ -13,7 +15,7 @@ exports.getCart = (req, res) => {
   req.user
     .getCartItems()
     .then((products) => {
-      console.log(products.totalPrice, "prod");
+      //console.log(products.totalPrice, "prod");
       res.render("shop/cart", {
         pageTitle: "Cart",
         products: products.products,
@@ -35,8 +37,10 @@ exports.getCheckout = (req, res) => {
 
 exports.getProductDetails = (req, res) => {
   const { prodId } = req.params;
+  //mongose has findById method that will fetch a particular product with that id
   Product.findById(prodId)
     .then((productDetails) => {
+      console.log(productDetails, "getProductDetails");
       res.render("shop/product-details", {
         pageTitle: "ProductDetails",
         product: productDetails,

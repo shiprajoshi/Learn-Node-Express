@@ -1,3 +1,28 @@
+const mongoose = require("mongoose");
+
+const Schema = mongoose.Schema;
+
+const productSchema = new Schema({
+  title: {
+    type: String,
+    required: true,
+  },
+  price: {
+    type: Number,
+    required: true,
+  },
+  description: {
+    type: String,
+    required: true,
+  },
+  imageURL: {
+    type: String,
+    required: true,
+  },
+});
+
+//Product with plural form would be used as collection name
+module.exports = mongoose.model("Product", productSchema);
 // const { getDB } = require("../utils/database");
 // const mongodb = require("mongodb");
 

@@ -8,9 +8,8 @@ const dirName = require("./utils/path");
 const errorController = require("./controllers/error");
 // const { mongoConnect } = require("./utils/database");
 
-const mongoode = require("mongoose");
+const mongoose = require("mongoose");
 const User = require("./models/user");
-const { default: mongoose } = require("mongoose");
 
 const app = express();
 
@@ -30,21 +29,22 @@ app.use(bodyParser.urlencoded({ extended: false }));
 //     })
 //     .catch((err) => console.log(err));
 // });
-// //filter using /admin routes
-// app.use("/admin", adminData.router);
 
-// app.use(customerRoutes);
+//filter using /admin routes
+app.use("/admin", adminData.router);
 
-// app.use(express.static(path.join(__dirname, "public")));
+app.use(customerRoutes);
 
-// app.use(errorController.get404);
+app.use(express.static(path.join(__dirname, "public")));
+
+app.use(errorController.get404);
 
 mongoose
   .connect(
     "mongodb+srv://shiprajoshi:shipra@cluster0.bqapehd.mongodb.net/shop?retryWrites=true&w=majority"
   )
   .then((res) => {
-    console.log(res);
+    //console.log(res);
     app.listen(3000);
   })
   .catch((err) => console.log(err));

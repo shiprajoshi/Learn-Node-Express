@@ -1,16 +1,16 @@
-// const express = require("express");
-// const path = require("path");
-// const dirName = require("./../utils/path");
-// const customerControllers = require("../controllers/shop/shopControllers");
-// const router = express.Router();
+const express = require("express");
+const path = require("path");
+const dirName = require("./../utils/path");
+const customerControllers = require("../controllers/shop/shopControllers");
+const router = express.Router();
 
-// router.get("/", customerControllers.getProducts);
+router.get("/", customerControllers.getProducts);
 
 // router.get("/cart", customerControllers.getCart);
 
 // router.get("/orders", customerControllers.getCheckout);
 
-// router.get("/product-details/:prodId", customerControllers.getProductDetails);
+router.get("/product-details/:prodId", customerControllers.getProductDetails);
 
 // router.post("/add-to-cart", customerControllers.postAddToCart);
 
@@ -18,4 +18,4 @@
 
 // router.post("/orders", customerControllers.postCheckout);
 
-// module.exports = router;
+module.exports = router;
