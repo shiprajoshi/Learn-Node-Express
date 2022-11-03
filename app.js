@@ -21,14 +21,14 @@ app.set("views", "views");
 
 app.use(bodyParser.urlencoded({ extended: false }));
 
-// app.use((req, res, next) => {
-//   User.findById("6362af87034434e69db3655d")
-//     .then((user) => {
-//       req.user = new User(user.name, user.email, user.cart, user._id);
-//       next();
-//     })
-//     .catch((err) => console.log(err));
-// });
+app.use((req, res, next) => {
+  User.findById("6363c068c9e58b5ff73b8f96")
+    .then((user) => {
+      req.user = user;
+      next();
+    })
+    .catch((err) => console.log(err));
+});
 
 //filter using /admin routes
 app.use("/admin", adminData.router);
@@ -45,6 +45,19 @@ mongoose
   )
   .then((res) => {
     //console.log(res);
+    User.findOne().then((u) => {
+      if (!u) {
+        const user = new User({
+          name: "Shipra",
+          email: "joshishipra0@gmail.com",
+          cart: {
+            products: [],
+            totalPrice: 0,
+          },
+        });
+        user.save();
+      }
+    });
     app.listen(3000);
   })
   .catch((err) => console.log(err));

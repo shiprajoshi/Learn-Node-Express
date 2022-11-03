@@ -13,18 +13,23 @@
       <ul>
         <% for(const product of products) {%>
         <li>
-          <b><%= product.title %></b>
-          <span>£<%= product.price %></span>
+          <b><%= product.productId.title %></b>
+          <br />
+          <span>£<%= product.productId.price %></span>
           <form action="/add-to-cart" method="POST">
-            <input type="hidden" name="_id" value="<%= product._id%>" />
+            <input
+              type="hidden"
+              name="_id"
+              value="<%= product.productId._id%>"
+            />
             <button type="submit">
               <span> + </span>
             </button>
           </form>
           <button>
-            <a href="/delete-item-from-cart/<%= product._id%>">-</a>
+            <a href="/delete-item-from-cart/<%= product.productId._id%>">-</a>
           </button>
-          <span><%= product.quantity.qty%></span>
+          <b>Quantity : </b><span><%= product.quantity%></span>
         </li>
         <% } %>
       </ul>

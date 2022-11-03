@@ -19,12 +19,14 @@ exports.getAdminProducts = (req, res) => {
 };
 
 exports.postAddProduct = (req, res) => {
+  console.log(req.user, "postAddProduct");
   const { title, image, price, description } = req.body;
   const prod = new Product({
     title: title,
     imageURL: image,
     price: price,
     description: description,
+    userId: req.user,
     // null,
     // req.user._id}
   });

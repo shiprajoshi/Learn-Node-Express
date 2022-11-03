@@ -15,11 +15,14 @@
       <% for(const product of order.products){%>
       <div class="item_card">
         <div class="item_description">
-          <div class="item-title"><b><%= product.title %></b></div>
-          <img src="<%= product.imageURL %>" alt="<%= product.title%>" />
-          <p><%= product.description %></p>
-          <div>£ <%= product.price %></div>
-          <p>Quantity : <%= product.quantity.qty%></p>
+          <div class="item-title"><b><%= product.product.title %></b></div>
+          <img
+            src="<%= product.product.imageURL %>"
+            alt="<%= product.product.title%>"
+          />
+          <p><%= product.product.description %></p>
+          <div>£ <%= product.product.price %></div>
+          <p>Quantity : <%= product.quantity%></p>
           <br />
         </div>
       </div>

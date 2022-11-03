@@ -1,3 +1,114 @@
+const mongoose = require("mongoose");
+
+const Schema = mongoose.Schema;
+
+const userSchema = new Schema({
+  name: {
+    type: String,
+    required: true,
+  },
+  email: {
+    type: String,
+    required: true,
+  },
+  cart: {
+    products: [
+      {
+        productId: {
+          type: Schema.Types.ObjectId,
+          ref: "Product",
+          required: true,
+        },
+        quantity: {
+          type: Number,
+          required: true,
+        },
+      },
+    ],
+    totalPrice: {
+      type: Number,
+      required: false,
+    },
+  },
+});
+
+userSchema.methods.addToCart = function (product) {
+  console.log(product, "hello");
+  const existingProductIndex = this.cart.products.findIndex((prod) => {
+    return prod.productId.toString() == product._id.toString();
+  });
+  const existingProduct = this.cart.products[existingProductIndex];
+  let updatedCart;
+  let totalPrice = !this.cart.totalPrice ? 0 : this.cart.totalPrice;
+  if (existingProductIndex >= 0) {
+    existingProduct.quantity = existingProduct.quantity + 1;
+    updatedCart = {
+      products: this.cart.products,
+      totalPrice: Number(totalPrice) + Number(product.price),
+    };
+  } else {
+    //if not present in cart
+    updatedCart = {
+      products: [
+        ...this.cart.products,
+        { productId: product._id, quantity: 1 },
+      ],
+      totalPrice: totalPrice + Number(product.price),
+    };
+    console.log(updatedCart, "hello update cart");
+  }
+  this.cart = updatedCart;
+  return this.save();
+  //   const db = getDB();
+  //   return db
+  //     .collection("users")
+  //     .updateOne(
+  //       { _id: new mongodb.ObjectId(this._id) },
+  //       { $set: { cart: updatedCart } }
+  //     );
+};
+
+userSchema.methods.deleteCartItem = function (product) {
+  let updatedCartProducts = this.cart.products;
+  const productIndex = this.cart.products.findIndex((prod) => {
+    return prod.productId.toString() == product._id.toString();
+  });
+  console.log("delete cart items", updatedCartProducts[productIndex]);
+  if (updatedCartProducts[productIndex].quantity == 1) {
+    updatedCartProducts = this.cart.products.filter((item) => {
+      console.log(item.productId.toString(), product._id.toString(), "here");
+      return item.productId.toString() !== product._id.toString();
+    });
+  } else updatedCartProducts[productIndex].quantity--;
+  console.log(updatedCartProducts, "helloooo");
+
+  this.cart.products = updatedCartProducts;
+  return this.save();
+  //   const db = getDB();
+  //   return db.collection("users").updateOne(
+  //     {
+  //       _id: new mongodb.ObjectId(this._id),
+  //     },
+  //     {
+  //       $set: {
+  //         cart: {
+  //           products: updatedCartProducts,
+  //           totalPrice: this.cart.totalPrice - product.price,
+  //         },
+  //       },
+  //     }
+  //   );
+};
+
+userSchema.methods.clearCart = function () {
+  this.cart = {
+    products: [],
+    totalPrice: 0,
+  };
+  return this.save();
+};
+module.exports = mongoose.model("User", userSchema);
+
 // const { getDB } = require("../utils/database");
 // const mongodb = require("mongodb");
 // class User {
